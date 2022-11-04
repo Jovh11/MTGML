@@ -235,6 +235,7 @@ def reccomendation(decklist, land_count=36):
     true_pct = mana_pct(decklist)
     budget = land_budget()
     non_basics = identity_search(budget)
+    land_count = land_count - len(non_basics)
     true_count = [value * land_count for value in true_pct]
     white_sources = round(true_count[0])
     blue_sources = round(true_count[1])
@@ -242,7 +243,22 @@ def reccomendation(decklist, land_count=36):
     red_sources = round(true_count[3])
     green_sources = round(true_count[4])
     colorless_sources = round(true_count[5])
-    print(f'I suggest that you run {white_sources} Plains, {blue_sources} Islands, {black_sources} Swamps, {red_sources} Mountains, {green_sources} Forests, and {colorless_sources} Wastes')
+    color_count = [white_sources, blue_sources, black_sources, red_sources, green_sources, colorless_sources]
+    colors = ['Plains', 'Islands', 'Swamps', 'Mountains', 'Forests', 'Wastes']
+    colors_present = {}
+    i = 0
+    while i < len(color_count):
+        if color_count[i] > 0:
+            colors_present[colors[i]] = color_count[i]
+            i+=1
+        else:
+            i+=1
+    print('I suggest that you run')
+    for basic in list(colors_present.keys()):
+        print(f'{colors_present[basic]} {basic}')
+    list_nonbasics = list(non_basics.keys())
+    for card in list_nonbasics:
+        print(card)
 
 def color_identity(decklist):
     names = decklist['Name'].values
@@ -284,16 +300,6 @@ def identity_search(land_list):
     # print(non_basics)
     return non_basics
 
-
-
-decklist = pd.read_csv('Miirym.csv')
-lands = pd.read_csv('lands.csv', index_col=[0])
-lands = lands.dropna()
-# reccomendation(decklist)
-
-
-
-
 true_duals = ['Tundra', 'Scrubland', 'Plateau', 'Savannah', 'Underground Sea', 'Volcanic Island', 'Tropical Island', 'Badlands', 'Bayou', 'Taiga']
 fetches = ['Flooded Strand', 'Marsh Flats', 'Arid Mesa', 'Windswept Heath', 'Polluted Delta', 'Scalding Tarn', 'Misty Rainforest', 'Bloodstained Mire', 'Verdant Catacombs', 'Wooded Foothills']
 shocks = ['Hallowed Fountain', 'Godless Shrine', 'Sacred Foundry', 'Temple Garden', 'Watery Grave', 'Steam Vents', 'Breeding Pool', 'Blood Crypt', 'Overgrown Tomb', 'Stomping Ground']
@@ -318,7 +324,7 @@ high_budget = [fetches, shocks, tri_lands, filter_lands, tango_lands]
 medium_budget = [check_lands, temples, pain_lands, reveal_lands, slow_lands, fast_lands]
 low_budget = [gain_lands, gates, typed_duals, snow_duals, artifact_duals]
 
-test = color_identity(decklist)
-budget = land_budget()
-info = identity_search(budget)
-print(info)
+decklist = pd.read_csv('Miirym.csv')
+lands = pd.read_csv('lands.csv', index_col=[0])
+lands = lands.dropna()
+reccomendation(decklist)
