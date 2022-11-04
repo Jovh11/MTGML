@@ -19,3 +19,9 @@ while i < len(fetches):
     i += 1
 # print(land_df.loc[land_df['name'] == 'Polluted Delta'])
 land_df.to_csv('lands.csv')
+
+# df = pd.read_json('all_cards.json')
+# print(df.columns.unique)
+# interested_info = df[['name', 'mana_cost', 'cmc', 'edhrec_rank']]
+# print(interested_info)
+# interested_info.to_csv('names.csv')
