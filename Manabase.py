@@ -13,10 +13,10 @@ true_duals = ['Tundra', 'Scrubland', 'Plateau', 'Savannah', 'Underground Sea', '
 fetches = ['Flooded Strand', 'Marsh Flats', 'Arid Mesa', 'Windswept Heath', 'Polluted Delta', 'Scalding Tarn', 'Misty Rainforest', 'Bloodstained Mire', 'Verdant Catacombs', 'Wooded Foothills']
 shocks = ['Hallowed Fountain', 'Godless Shrine', 'Sacred Foundry', 'Temple Garden', 'Watery Grave', 'Steam Vents', 'Breeding Pool', 'Blood Crypt', 'Overgrown Tomb', 'Stomping Ground']
 tri_lands = ["Raffine's Tower", 'Raugrin Triome', "Spara's Headquarters", "Xander's Lounge", 'Zagoth Triome', "Ziatora's Proving Ground", 'Savai Triome', 'Indatha Triome', 'Ketria Triome', "Jetmir's Garden"]
-check_lands = ['Glacial Fortess', 'Isolated Chapel', 'Clifftop Retreat', 'Sunpetal Grove', 'Drowned Catacombs', 'Sulfur Falls', 'Hinterland Harbor', 'Dragonskull Summit', 'Woodland Cemetery', 'Rootbound Crag']
+check_lands = ['Glacial Fortress', 'Isolated Chapel', 'Clifftop Retreat', 'Sunpetal Grove', 'Drowned Catacomb', 'Sulfur Falls', 'Hinterland Harbor', 'Dragonskull Summit', 'Woodland Cemetery', 'Rootbound Crag']
 temples = ['Temple of Enlightenment', 'Temple of Silence', 'Temple of Triumph', 'Temple of Plenty', 'Temple of Deceit', 'Temple of Epiphany', 'Temple of Mystery', 'Temple of Malice', 'Temple of Malady', 'Temple of Abandon']
 filter_lands = ['Mystic Gate', 'Fetid Heath', 'Rugged Prairie', 'Wooded Bastion', 'Sunken Ruins', 'Cascade Bluffs', 'Flooded Grove', 'Graven Cairns', 'Twilight Mire', 'Fire-Lit Thicket']
-gates = ['Azorius Guildgate', 'Orzhov Guildgate', 'Boros Guildgate', 'Selesnya Guildgate', 'Dimir Guildgate', 'Izzet Guildgate', 'Simic Guildgate', 'Rakdos Guildgate', 'Golgari Guildgate', 'Gruul Guildgate',' Citadel Gate', 'Sea Gate', 'Black Dragon Gate', 'Cliffgate', 'Manor Gate', "Baldur's Gate", 'Basilisk Gate', 'Gateway Plaza', 'Gond Gate', 'Heap Gate', 'Thran Portal']
+gates = ['Azorius Guildgate', 'Orzhov Guildgate', 'Boros Guildgate', 'Selesnya Guildgate', 'Dimir Guildgate', 'Izzet Guildgate', 'Simic Guildgate', 'Rakdos Guildgate', 'Golgari Guildgate', 'Gruul Guildgate','Citadel Gate', 'Sea Gate', 'Black Dragon Gate', 'Cliffgate', 'Manor Gate', "Baldur's Gate", 'Basilisk Gate', 'Gateway Plaza', 'Gond Gate', 'Heap Gate', 'Thran Portal']
 pain_lands = ['Adarkar Wastes', 'Caves of Koilos', 'Battlefield Forge', 'Brushland', 'Underground River', 'Shivan Reef', 'Yavimaya Coast', 'Sulfurous Springs', 'Llanowar Wastes', 'Karplusan Forest']
 gain_lands = ['Tranquil Cove', 'Scoured Barrens', 'Wind-Scarred Crag', 'Blossoming Sands', 'Dismal Backwater', 'Swiftwater Cliffs', 'Thornwood Falls', 'Bloodfell Caves', 'Jungle Hollow', 'Rugged Highlands']
 reveal_lands = ['Port Town', 'Shineshadow Snarl', 'Furycalm Snarl', 'Fortified Village', 'Choked Estuary', 'Frostboil Snarl', 'Vineglimmer Snarl', 'Foreboding Ruins', 'Necroblossom Snarl', 'Game Trail']
@@ -272,20 +272,14 @@ def color_identity(decklist):
     return identities
 
 def identity_search(land_list):
-    # print(land_list)
     target_ids = color_identity(decklist)
-    # print(target_ids)
     non_basics = {}
     for lists in land_list:
         for land in lists:
-            # print(land)
             specific_land = lands.loc[lands['name'] == land]
-            # print(specific_land)
             identity = specific_land['color_identity'].values[0]
-            # print(identity)
             if identity in target_ids:
                 non_basics[land] = identity
-    # print(non_basics)
     return non_basics
 
 # Next (and this will be changed in time) we determine which types of non-basic lands are being used. I broke down the (sometimes overwhelimg cost of a mana base into four tiers of
